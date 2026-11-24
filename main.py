@@ -28,6 +28,9 @@ def write_entry(path):
     if not text or len(text) > 240:
         print(f"entry is {len(text)} chars, must be 1..240", file=sys.stderr)
         return 1
+    if "\n" in text or "\r" in text:
+        print("entry must be a single line of text", file=sys.stderr)
+        return 1
     parent = os.path.dirname(path)
     if parent:
         os.makedirs(parent, exist_ok=True)
